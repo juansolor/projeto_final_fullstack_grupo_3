@@ -24,6 +24,12 @@ const Navbar = () => {
     navigate(page);
   };
 
+  // Estado para controlar si el dropdown está abierto
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // Función para alternar el estado del dropdown
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
   return (
 <nav className="navbar navbar-expand-lg navbar-custom fixed-top shadow">
   <div className="container-fluid">
@@ -43,10 +49,19 @@ const Navbar = () => {
           <button className="nav-link btn btn-link" style={{textDecoration: 'none'}} onClick={() => handlePageChange('/ofertas')}>Ofertas do Dia</button>
         </li>
         <li className="nav-item dropdown">
-          <button className="nav-link dropdown-toggle btn btn-link" style={{textDecoration: 'none'}} data-bs-toggle="dropdown" aria-expanded="false" onClick={(e) => e.preventDefault()}>
+          <button
+            className="nav-link dropdown-toggle btn btn-link"
+            style={{textDecoration: 'none'}}
+            data-bs-toggle="dropdown"
+            aria-expanded={dropdownOpen}
+            onClick={(e) => {
+              e.preventDefault();
+              toggleDropdown();
+            }}
+          >
             Categorias
           </button>
-          {dropdownMenu(handlePageChange)}
+          {dropdownOpen && dropdownMenu(handlePageChange)}
         </li>
         <li className="nav-item">
           <button className="nav-link active btn btn-link" style={{textDecoration: 'none'}} onClick={() => handlePageChange('/carrinho')}>carrinho</button>
