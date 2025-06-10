@@ -1,0 +1,60 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #fff;
+}
+
+.navbar-custom {
+  background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+}
+
+.navbar-custom .nav-link.active,
+.navbar-custom .nav-link:focus,
+.navbar-custom .nav-link:hover {
+  color: #000 !important;
+  background: rgba(255,255,255,0.15);
+  border-radius: 5px;
+}
+
+body {
+  background-color: #111;
+}
+
+.App-link {
+  color: #3FD37D;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
