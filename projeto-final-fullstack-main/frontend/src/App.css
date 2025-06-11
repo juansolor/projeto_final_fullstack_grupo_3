@@ -22,10 +22,13 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #fff;
+  min-height: auto;
 }
 
 .navbar-custom {
   background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
+  margin-top: 60px;
+  z-index: 20;
 }
 
 .navbar-custom .navbar-brand,
@@ -44,6 +47,7 @@
 
 body {
   background-color: #111;
+  padding-top: 50px; /* Ajusta según el alto del header */
 }
 
 .App-link {
@@ -57,4 +61,87 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.footer-horizontal {
+    width: 100vw;
+    background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
+    color: #fff;
+    padding: 10px 0;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  width: 100%;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.footer-content > * {
+  flex: 1 1 180px;
+  min-width: 180px;
+}
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+footer li {
+  margin-bottom: 8px;
+}
+.footer-content img {
+    margin-bottom: 10px;
+}
+
+
+.header-solid {
+    width: 100vw;
+    background:  #3FD37D 100%;
+    color: #fff;
+    padding: 10px 0;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    z-index: 10;
+}
+
+.header-content {
+  display: flex;
+  flex-wrap: row;
+  justify-content: space-between;
+  align-items:center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px 16px;
+  width: 100%;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.header-placeholder {
+    height: 50px; /* Ajusta este valor al alto real de tu header */
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px; /* Espacio entre los links */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
 }

@@ -8,10 +8,14 @@ import Users from './pages/user';
 import Navbar from './components/navbar';
 import Registros from './pages/Registro';
 import Ofertas from './pages/ofertas'; 
+import Footer from './components/footer';
+import Header from './components/header';
 
 function App() {
   return (
     <>
+      <Header />
+      <div className="header-placeholder"></div>
       <Navbar />
       <div style={{ height: 70 }}></div>
       <div className="container" style={{ maxWidth: 1000 }}>
@@ -25,6 +29,8 @@ function App() {
           {/* Adicione outras rotas conforme necessário */}
         </Routes>
       </div>
+      <Footer />
+      <div style={{ height: 70 }}></div>
     </>
   );
 }
