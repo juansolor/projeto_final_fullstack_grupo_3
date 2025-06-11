@@ -1,8 +1,6 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import '../pages/subpages/Atendimento.js';
-import '../pages/subpages/Lojas.js';
-import '../pages/subpages/TrabalheConosco.js';
-import '../pages/ofertas.js';
+
 
 const Header = () => {
     return (

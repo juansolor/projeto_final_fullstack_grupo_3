@@ -10,6 +10,10 @@ import Registros from './pages/Registro';
 import Ofertas from './pages/ofertas'; 
 import Footer from './components/footer';
 import Header from './components/header';
+import Lojas from './pages/subpages/Lojas';
+import Atendimento from './pages/subpages/Atendimento';
+import TrabalheConosco from './pages/subpages/TrabalheConosco';
+import SuperUser from './pages/SuperUser';
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
           <Route path="/carrinho" element={<Carrinho />} />
           <Route path="/user" element={<Users />} />
           <Route path="/registro" element={<Registros />} />
+          <Route path="/pages/subpages/Lojas" element={<Lojas />} />
+          <Route path="/pages/subpages/Atendimento" element={<Atendimento />} />
+          <Route path="/pages/subpages/TrabalheConosco" element={<TrabalheConosco />} />
+          <Route path="/SuperUser" element={<SuperUser />} />
           {/* Adicione outras rotas conforme necessário */}
         </Routes>
       </div>

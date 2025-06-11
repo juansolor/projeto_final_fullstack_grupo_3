@@ -6,5 +6,8 @@ const sequelize = new Sequelize({
   storage: './database.sqlite', // cria o arquivo na raiz do backend
 });
 
+const Imagem = require('./Imagem')(sequelize, Sequelize.DataTypes);
+db.Imagem = Imagem;
+
 // Exporta o Sequelize para os modelos
-module.exports = { sequelize };
+module.exports = { sequelize, db };

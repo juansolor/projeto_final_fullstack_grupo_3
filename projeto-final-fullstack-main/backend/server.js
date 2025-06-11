@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./models'); // importa a pasta models/index.js
 const usuariosRoutes = require('./routes/api/usuarios'); // importa as rotas de usuários
+const imagensRoutes = require('./routes/api/imagens');
+app.use('/api/imagens', imagensRoutes);
 
 // Inicializa o app
 const app = express();
