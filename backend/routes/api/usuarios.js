@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Usuario = require('../../models/Usuario'); // importa o modelo Usuario
+const db = require('../../models');
+const Usuario = db.Usuario;
 
 // GET /api/usuarios - lista todos os usuários
 router.get('/', async (req, res) => {
