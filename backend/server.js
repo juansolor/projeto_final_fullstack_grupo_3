@@ -4,7 +4,7 @@ const cors = require('cors');
 const db = require('./models'); // importa a pasta models/index.js
 const usuariosRoutes = require('./routes/api/usuarios'); // importa as rotas de usuários
 const imagensRoutes = require('./routes/api/imagens');
-app.use('/api/imagens', imagensRoutes);
+
 const path = require('path');
 const fs = require('fs');
 
@@ -18,12 +18,18 @@ app.use(express.json()); // permite receber JSON no body das requisições
 
 // Rotas
 app.use('/api/usuarios', usuariosRoutes); // usa as rotas de usuários com prefixo /api/usuarios
+app.use('/api/imagens', imagensRoutes);
 
 // Serve arquivos estáticos da build do React
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Serve arquivos estáticos do React (apenas se a pasta build existir)
 const buildPath = path.join(__dirname, '../frontend/build');
+
+// Rota de teste
+app.get('/', (req, res) => {
+  res.send('API rodando com sucesso!');
+});
 
 //=====================PARA COLOCAR EN PRODUÇÃO==============
 // Rota para servir SPA React, ignorando rotas que começam com /api
@@ -41,4 +47,3 @@ db.sequelize.sync().then(() => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
   });
 });
-//=====================PARA COLOCAR EN PRODUCCIÓN==============
