@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const ofertas = [
     {
+        
         id: 1,
         titulo: "Oferta 1",
         descricao: "Descrição da oferta 1.",

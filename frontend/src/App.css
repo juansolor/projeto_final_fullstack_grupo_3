@@ -63,17 +63,66 @@ body {
   }
 }
 
+.linha{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.col-4{
+    flex-basis: 25%;
+    min-width: 200px;
+    padding: 10px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+}
+
+.col-4:hover{
+    transform: scale(1.1);
+
+}
+
+.col-4 img{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* -----CARDS----*/
+.card-body{
+  transition: transform 0.5s;
+}
+
+.card-body:hover{
+  transform: scale(1.1);
+}
+
+/*-----FORMULARIO TRABALHE CONOSCO---*/
+.mb-4{
+  transition: transform 0.5s;
+}
+
+.mb-4:hover{
+  transform: scale(1.0);
+}
+
+
+
 
 .footer-horizontal {
     width: 100vw;
     background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
     color: #fff;
-    padding: 10px 0;
-    position: relative;
+    padding: 10px  0;
+    position: absolute;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+   
+    
 }
 
 .footer-content {
@@ -87,6 +136,7 @@ body {
   width: 100%;
   gap: 32px;
   box-sizing: border-box;
+  
 }
 
 .footer-content > * {
