@@ -10,6 +10,7 @@ const db = {};
 
 db.Imagem = require('./Imagem')(sequelize, Sequelize.DataTypes);
 db.Usuario = require('./Usuario')(sequelize, Sequelize.DataTypes);
+db.Carrinho = require('./Carrinho')(sequelize, Sequelize.DataTypes);
 // // Se você tiver mais modelos, adicione-os aqui, por exemplo:
 // db.Usuario = require('./Usuario')(sequelize, Sequelize.DataTypes);
 

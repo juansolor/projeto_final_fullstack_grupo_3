@@ -4,6 +4,7 @@ const cors = require('cors');
 const db = require('./models'); // importa a pasta models/index.js
 const usuariosRoutes = require('./routes/api/usuarios'); // importa as rotas de usuários
 const imagensRoutes = require('./routes/api/imagens');
+const carrinhoRoutes = require('./routes/api/carrinho');
 
 const path = require('path');
 const fs = require('fs');
@@ -19,6 +20,7 @@ app.use(express.json()); // permite receber JSON no body das requisições
 // Rotas
 app.use('/api/usuarios', usuariosRoutes); // usa as rotas de usuários com prefixo /api/usuarios
 app.use('/api/imagens', imagensRoutes);
+app.use('/api/carrinho', carrinhoRoutes);
 
 // Serve arquivos estáticos da build do React
 app.use(express.static(path.join(__dirname, '../frontend/build')));

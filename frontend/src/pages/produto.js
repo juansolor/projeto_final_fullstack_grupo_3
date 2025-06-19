@@ -2,14 +2,31 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import axios from "axios";
 
 const Produto = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const produto = location.state?.produto;
 
-  const handleComprar = () => {
-    navigate("/carrinho", { state: { produto } });
+  const handleComprar = async () => {
+    // Extrae y normaliza los datos para el backend
+    const novoProduto = {
+      title: produto.title,
+      img:
+        typeof produto.img === "string"
+          ? produto.img
+          : produto.img?.default || "",
+      preco: Number(produto.price.replace(/[^\d,]/g, "").replace(",", ".")),
+      quantidade: 1,
+    };
+    try {
+      await axios.post("http://localhost:3001/api/carrinho", novoProduto);
+      // Redirige al carrinho sin pasar state, para que carrinho.js consuma el backend
+      navigate("/carrinho");
+    } catch (err) {
+      alert("Erro ao adicionar produto ao carrinho");
+    }
   };
 
   if (!produto) {
