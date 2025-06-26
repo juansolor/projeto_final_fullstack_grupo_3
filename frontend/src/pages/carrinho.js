@@ -3,6 +3,8 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
 const Carrinho = () => {
   const [carrinho, setCarrinho] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ const Carrinho = () => {
   useEffect(() => {
     const fetchCarrinho = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/api/carrinho");
+        const res = await axios.get(`${API_URL}/api/carrinho`);
         setCarrinho(res.data);
       } catch (err) {
         setError("Erro ao carregar o carrinho");
@@ -26,7 +28,7 @@ const Carrinho = () => {
   const handleUpdate = async (id, quantidade) => {
     if (quantidade < 1) return;
     try {
-      await axios.patch(`http://localhost:3001/api/carrinho/${id}`, { quantidade });
+      await axios.patch(`${API_URL}/api/carrinho/${id}`, { quantidade });
       setCarrinho((prev) => prev.map(item => item.id === id ? { ...item, quantidade } : item));
     } catch (err) {
       alert("Erro ao atualizar quantidade");
@@ -37,7 +39,7 @@ const Carrinho = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Tem certeza que deseja remover este produto do carrinho?")) return;
     try {
-      await axios.delete(`http://localhost:3001/api/carrinho/${id}`);
+      await axios.delete(`${API_URL}/api/carrinho/${id}`);
       setCarrinho((prev) => prev.filter(item => item.id !== id));
       window.alert("Produto removido do carrinho!");
     } catch (err) {

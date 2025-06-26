@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const SuperUser = () => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
@@ -39,7 +41,7 @@ const SuperUser = () => {
         formData.append("categoria", categoria);
 
         try {
-            await axios.post("http://localhost:5000/upload", formData, {
+            await axios.post(`${API_URL}/upload`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             setMessage("Imagem enviada com sucesso!");

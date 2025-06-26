@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import axios from "axios";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
+
 const Produto = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +23,7 @@ const Produto = () => {
       quantidade: 1,
     };
     try {
-      await axios.post("http://localhost:3001/api/carrinho", novoProduto);
+      await axios.post(`${API_URL}/api/carrinho`, novoProduto);
       // Redirige al carrinho sin pasar state, para que carrinho.js consuma el backend
       navigate("/carrinho");
     } catch (err) {
