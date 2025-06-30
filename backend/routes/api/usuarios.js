@@ -30,8 +30,8 @@ router.get('/:id', async (req, res) => {
 // POST /api/usuarios - cria novo usuário
 router.post('/', async (req, res) => {
   try {
-    const { nome, email, comportamento } = req.body;
-    const novoUsuario = await Usuario.create({ nome, email, comportamento });
+    const { nome, email, comportamento, endereco, cep, telefone, password } = req.body;
+    const novoUsuario = await Usuario.create({ nome, email, comportamento, endereco, cep, telefone, password });
     res.status(201).json(novoUsuario);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao criar usuário' });
@@ -54,15 +54,14 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
-
 // PUT /api/usuarios/:id - Atualiza completamente usuário pelo ID (PUT)
 router.put('/:id', async (req, res) => {
   try {
-    const { nome, email, comportamento } = req.body;
+    const { nome, email, comportamento, endereco, cep, telefone, password } = req.body;
     const usuario = await Usuario.findByPk(req.params.id);
 
     if (usuario) {
-      await usuario.update({ nome, email, comportamento });
+      await usuario.update({ nome, email, comportamento, endereco, cep, telefone, password });
       res.json(usuario);
     } else {
       res.status(404).json({ error: 'Usuário não encontrado' });

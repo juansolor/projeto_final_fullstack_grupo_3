@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
+import HistoricoCompras from "./HistoricoCompras";
 
 const User = () => {
   const [user, setUser] = useState(null);
@@ -8,9 +9,20 @@ const User = () => {
   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
   useEffect(() => {
+    // Intentar cargar usuario de localStorage primero
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+      setLoading(false);
+      return;
+    }
+    // Si no hay usuario en localStorage, buscar en backend
     const fetchUser = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/user`);
+        const userId = storedUser ? JSON.parse(storedUser).id : null;
+        const response = await fetch(`${API_URL}/api/user`, {
+          headers: userId ? { 'x-user-id': userId } : {}
+        });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -22,7 +34,6 @@ const User = () => {
         setLoading(false);
       }
     };
-
     fetchUser();
   }, []);
 
@@ -50,8 +61,10 @@ const User = () => {
                 throw new Error("Login failed");
               }
               const data = await response.json();
+              // Guardar usuario en localStorage
+              localStorage.setItem("user", JSON.stringify(data));
+              setUser(data);
               alert("Login successful!");
-              // Optionally, redirect or store token here
             } catch (error) {
               alert("Login failed: " + error.message);
             }
@@ -88,20 +101,21 @@ const User = () => {
   }
 
   // Si el usuario está autenticado, muestra su información y el botón solo si es admin
-  return (
-    <div className="container mt-5" style={{ maxWidth: "400px" }}>
-      <h2 className="mb-4">Bem-vindo, {user.name}</h2>
-      <p>Email: {user.email}</p>
-      {/* Mostrar el botón solo si el usuario es admin */}
-      {user.role === "admin" && (
-        <div className="mt-3 text-center">
-          <Link to="/SuperUser" className="btn btn-warning">
-            Painel do Super Usuário
-          </Link>
-        </div>
-      )}
-    </div>
-  );
+  if (user) {
+    return (
+      <div className="container mt-5">
+        <h2 className="mb-4">Bem-vindo, {user.nome}!</h2>
+        <button className="btn btn-danger mb-3" onClick={() => {
+          localStorage.removeItem("user");
+          setUser(null);
+        }}>Logout</button>
+        {/* Otros datos del usuario aquí */}
+        <HistoricoCompras usuarioId={user.id} />
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default User;

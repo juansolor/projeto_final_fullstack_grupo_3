@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "Backend do projeto final fullstack com Node.js, Express, Sequelize e SQLite",
   "dependencies": {
+    "axios": "^1.10.0",
     "bootstrap": "^5.3.6",
     "cors": "^2.8.5",
     "express": "^5.1.0",
