@@ -1,8 +1,8 @@
-import UsuariosChart from './components/UsuariosChart';
-import UsuariosList from './components/UsuariosList';
-import UsuarioForm from './pages/Registro';
+import React from 'react';
+import UsuarioForm from './Registro';
 
-const adminuser = ({ setPage }) => {
+export default function Registro() {
+  // Función para guardar usuario en el backend
   const handleSaveUser = async (userData) => {
     try {
       const response = await fetch('http://localhost:3001/api/usuarios', {
@@ -18,13 +18,8 @@ const adminuser = ({ setPage }) => {
   };
 
   return (
-    <>
-      <h1>Home</h1>
-      <UsuariosChart />
-      <UsuariosList setPage={setPage} />
+    <div className="container mt-5">
       <UsuarioForm onSave={handleSaveUser} />
-    </>
+    </div>
   );
-};
-
-export default adminuser;
+}

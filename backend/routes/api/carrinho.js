@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../models');
 const Carrinho = db.Carrinho;
+const Pedido = db.Pedido;
+const axios = require('axios');
+const API_URL = process.env.API_URL || 'http://localhost:3000';
 
 // GET /api/carrinho - lista todos os produtos do carrinho
 router.get('/', async (req, res) => {
@@ -54,6 +57,35 @@ router.delete('/:id', async (req, res) => {
     res.json({ message: 'Produto removido do carrinho' });
   } catch (error) {
     res.status(500).json({ error: 'Erro ao deletar produto' });
+  }
+});
+
+// POST /api/carrinho/checkout - finalizar compra
+// Espera req.user.id (usuário autenticado)
+router.post('/checkout', async (req, res) => {
+  try {
+    const usuarioId = req.user?.id || req.body.usuarioId; // fallback para body se não houver auth middleware
+    if (!usuarioId) {
+      return res.status(400).json({ error: 'Usuário não autenticado' });
+    }
+    // Busca todos os itens do carrinho
+    const itens = await Carrinho.findAll();
+    if (!itens || itens.length === 0) {
+      return res.status(400).json({ error: 'Carrinho vazio' });
+    }
+    // Calcula o total
+    const total = itens.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+    // Cria o pedido
+    const pedido = await Pedido.create({
+      produtos: itens.map(item => item.toJSON()),
+      total,
+      usuarioId,
+    });
+    // Limpa o carrinho
+    await Carrinho.destroy({ where: {} });
+    res.status(201).json({ message: 'Compra finalizada com sucesso', pedido });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao finalizar compra' });
   }
 });
 

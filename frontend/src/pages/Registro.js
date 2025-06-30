@@ -9,6 +9,7 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
   const [endereco, setEndereco] = useState('');
   const [cep, setCep] = useState('');
   const [telefone, setTelefone] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     if (editingUser) {
@@ -18,6 +19,7 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
       setEndereco(editingUser.endereco || '');
       setCep(editingUser.cep || '');
       setTelefone(editingUser.telefone || '');
+      setPassword(editingUser.password || ''); // Asegúrate de que el campo password esté presente en editingUser
     } else {
       setNome('');
       setEmail('');
@@ -25,12 +27,46 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
       setEndereco('');
       setCep('');
       setTelefone('');
+      setPassword('');
     }
   }, [editingUser]);
+  // Cambia el nombre de la función interna para evitar conflicto con la prop
+  function handleSave(user) {
+    const newUser = {
+      ...user,
+      nome,
+      email,
+      comportamento,
+      endereco,
+      cep,
+      telefone,
+      password // Asegúrate de que el campo password esté presente en tu modelo
+    };
+    if (typeof onSave === 'function') {
+      onSave(newUser);
+    }
+    setNome('');
+    setEmail('');
+    setComportamento('');
+    setEndereco('');
+    setCep('');
+    setTelefone('');
+    setPassword('');
+  }
 
+  // Asegúrate de que los nombres de los campos coincidan con los del modelo User en tu backend.
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ nome, email, comportamento, endereco, cep, telefone });
+    // Ajusta los nombres de las propiedades según el esquema de tu base de datos
+    handleSave({
+      nome,           // nombre completo
+      email,          // correo electrónico
+      comportamento,  // comportamiento (si existe en tu modelo)
+      endereco,       // dirección
+      cep,            // código postal
+      telefone,       // teléfono
+      password        // contraseña (si es necesario)
+    });
   };
 
   return (
@@ -83,6 +119,25 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
           onChange={(e) => setTelefone(e.target.value)}
         />
       </div>
+      <div className="mb-3">
+        <label className="form-label">Password:</label>
+        <input
+          type="password"
+          className="form-control"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <div className="form-text text-muted">
+          Use uma senha forte:
+          <ul className="mb-0">
+            <li>Pelo menos 8 caracteres</li>
+            <li>Letras maiúsculas (A-Z)</li>
+            <li>Letras minúsculas (a-z)</li>
+            <li>Números (0-9)</li>
+            <li>Símbolos (ex: !@#$%^&amp;*)</li>
+          </ul>
+        </div>
+      </div>
       <button
         type="submit"
         className="btn btn-primary me-2"
@@ -94,7 +149,7 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
         type="button"
         className="btn btn-success me-2"
         disabled={!editingUser}
-        onClick={() => onSave({ nome, email, endereco, cep, telefone })}
+        onClick={() => handleSave({ nome, email, endereco, cep, telefone })}
       >
         Atualizar
       </button>

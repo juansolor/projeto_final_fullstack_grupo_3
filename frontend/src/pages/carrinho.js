@@ -47,10 +47,28 @@ const Carrinho = () => {
     }
   };
 
+  // Finalizar compra
+  const handleCheckout = async () => {
+    try {
+      // Obtener usuario autenticado de localStorage
+      const storedUser = localStorage.getItem("user");
+      const usuarioId = storedUser ? JSON.parse(storedUser).id : null;
+      if (!usuarioId) {
+        alert("Você precisa estar logado para finalizar a compra.");
+        return;
+      }
+      await axios.post(`${API_URL}/api/carrinho/checkout`, { usuarioId });
+      setCarrinho([]);
+      window.alert("Compra realizada com sucesso!");
+    } catch (err) {
+      alert("Erro ao finalizar a compra");
+    }
+  };
+
   const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
   const taxa = carrinho.length > 0 ? 24.36 : 0;
   const total = subtotal + taxa;
-
+  
   return (
     <div style={{ background: "#f5f5f5", minHeight: "100vh" }}>
       <div className="container py-4">
@@ -115,7 +133,7 @@ const Carrinho = () => {
                 <span>Total:</span>
                 <span>R${total.toFixed(2)} + Entrega</span>
               </div>
-              <button className="btn btn-success w-100 mt-3" style={{fontWeight: 700, fontSize: 18}}>Pagar Produto</button>
+              <button className="btn btn-success w-100 mt-3" style={{fontWeight: 700, fontSize: 18}} onClick={handleCheckout}>Pagar Produto</button>
             </div>
           </div>
         </div>
