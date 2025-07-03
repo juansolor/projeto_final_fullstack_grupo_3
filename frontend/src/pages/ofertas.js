@@ -3,85 +3,25 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const ofertas = [
-  {
-    title: "Laptop Quanttum",
-    description: "notebook. ",
-    nome: "Auragear",
-    img: require("../assets/Quanttum-produto1.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 5,
-    details: "Notebook com tela de 14 plg. processador de última geração, SSD..",
-    info: "Compatível todos os SO."
-  },
-  {
-    
-    title: "Processador QuantumPulse",
-    description: "processador.",
-    nome: "Auragear",
-    img: require("../assets/Quanttum-produto2.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 4,
-    details: "processador de última geração.",
-    info: "Compatível com todas as MB."
-  },
-  {
-    
-    title: "Servidor quântico",
-    description: "Servidor remoto.",
-    nome: "Auragear",
-    img: require("../assets/quanttum-produto3.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 3,
-    details: "Servidor remóto com tecnologia quântica.",
-    info: "Compatível todos os SO."
-  },
-  {
-    
-    title: "Optiview",
-    description: "Monitor 4K.",
-    nome: "Auragear",
-    img: require("../assets/optiview-produto1.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 2,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
-  },
     {
-    
-    title: "Kit Optaview",
-    description: "Kit inalámbrico de óculos, monitor e webcam.",
-    nome: "Auragear",
-    img: require("../assets/optiview-produto2.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 1,
-    details: "óculos de alta resolução, câmera web 4K e monitor de 30 plg. full HD. Todos os dispositivos com conectividade BlueTooth",
-    info: "Compatível com todos os SO."
-  },
+        id: 1,
+        titulo: "Oferta 1",
+        descricao: "Descrição da oferta 1.",
+        preco: "R$ 100,00"
+    },
+    {
+        id: 2,
+        titulo: "Oferta 2",
+        descricao: "Descrição da oferta 2.",
+        preco: "R$ 200,00"
+    },
+    {
+        id: 3,
+        titulo: "Oferta 3",
+        descricao: "Descrição da oferta 3.",
+        preco: "R$ 300,00"
+    }
 ];
-
-const carouselImages = [
-  require("../assets/Auragear-produto2.jpg"),
-  require("../assets/Byteware-produto1.jpg"),
-  require("../assets/NexaCore - produto1.jpg"),
-  require("../assets/soundpulse-produto1.jpg"),
-  require("../assets/Auragear-produto3.jpg"),
-  require("../assets/Byteware-produto2.jpg"),
-  require("../assets/Byteware-produto3.jpg"),
-  require("../assets/gamerlink-logo.jpg"),
-  require("../assets/PeriTech-produto1.jpg"),
-  require("../assets/Byteware-produto3.jpg"),
-  require("../assets/PeriTech-produto2.jpg"),
-  require("../assets/Quanttum-produto2.jpg"),
-  require("../assets/Quanttum-produto1.jpg"),
-  require("../assets/quanttum-produto3.jpg")
-];
-
-
 
 const Ofertas = () => {
   return (
