@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, Form, Button, InputGroup } from 'react-bootstrap';
 import { FaShoppingCart, FaUserCircle } from 'react-icons/fa'; // Using FaUserCircle for Login/Register for now
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -49,12 +50,12 @@ const Header = () => {
 
           {/* Login, Register, Cart Buttons */}
           <Nav className="ms-auto d-flex align-items-center">
-            <Button variant="success" className="me-2 d-flex align-items-center">
+            <Link to="/login" className="btn btn-success me-2 d-flex align-items-center">
               <FaUserCircle className="me-1" /> Login
-            </Button>
-            <Button variant="success" className="me-3 d-flex align-items-center">
+            </Link>
+            <Link to="/register" className="btn btn-success me-3 d-flex align-items-center">
               <FaUserCircle className="me-1" /> Registrar
-            </Button>
+            </Link>
             <Button variant="success" className="d-flex align-items-center">
               <FaShoppingCart className="me-1" /> Carrinho
             </Button>
