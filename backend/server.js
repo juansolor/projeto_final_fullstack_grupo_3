@@ -8,7 +8,10 @@ const carrinhoRoutes = require('./routes/api/carrinho');
 const pedidosRoutes = require('./routes/api/pedidos');
 const loginRoutes = require('./routes/api/login');
 const userRoutes = require('./routes/api/user');
+<<<<<<< HEAD
 const produtosRoutes = require('./routes/api/produtos');
+=======
+>>>>>>> origin/main
 
 const path = require('path');
 const fs = require('fs');
@@ -31,7 +34,10 @@ app.use('/api/carrinho', carrinhoRoutes);
 app.use('/api/pedidos', pedidosRoutes);
 app.use('/api/login', loginRoutes);
 app.use('/api/user', userRoutes);
+<<<<<<< HEAD
 app.use('/api/produtos', produtosRoutes);
+=======
+>>>>>>> origin/main
 
 // Serve arquivos estáticos da build do React
 app.use(express.static(path.join(__dirname, '../frontend/build')));

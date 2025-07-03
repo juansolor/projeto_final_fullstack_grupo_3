@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
 const express = require('express');
 const router = express.Router();
 const db = require('../../models');
 const Pedido = db.Pedido;
+<<<<<<< HEAD
 
 // GET /api/pedidos - lista todos os pedidos
 router.get('/', async (req, res) => {
@@ -22,6 +26,20 @@ router.post('/', async (req, res) => {
     res.status(201).json(novoPedido);
   } catch (error) {
     res.status(500).json({ error: 'Erro ao criar pedido' });
+=======
+const Usuario = db.Usuario;
+
+// GET /api/pedidos/:usuarioId - lista pedidos de um usuário
+router.get('/:usuarioId', async (req, res) => {
+  try {
+    const pedidos = await Pedido.findAll({
+      where: { usuarioId: req.params.usuarioId },
+      order: [['data', 'DESC']],
+    });
+    res.json(pedidos);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar pedidos do usuário' });
+>>>>>>> origin/main
   }
 });
 
