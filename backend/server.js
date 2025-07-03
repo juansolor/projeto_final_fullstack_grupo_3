@@ -5,6 +5,10 @@ const db = require('./models'); // importa a pasta models/index.js
 const usuariosRoutes = require('./routes/api/usuarios'); // importa as rotas de usuários
 const imagensRoutes = require('./routes/api/imagens');
 const carrinhoRoutes = require('./routes/api/carrinho');
+const pedidosRoutes = require('./routes/api/pedidos');
+const loginRoutes = require('./routes/api/login');
+const userRoutes = require('./routes/api/user');
+const produtosRoutes = require('./routes/api/produtos');
 
 const path = require('path');
 const fs = require('fs');
@@ -17,10 +21,17 @@ const PORT = process.env.PORT || 3001; // porta do backend
 app.use(cors()); // permite requisições do front-end (CORS)
 app.use(express.json()); // permite receber JSON no body das requisições
 
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Rotas
 app.use('/api/usuarios', usuariosRoutes); // usa as rotas de usuários com prefixo /api/usuarios
 app.use('/api/imagens', imagensRoutes);
 app.use('/api/carrinho', carrinhoRoutes);
+app.use('/api/pedidos', pedidosRoutes);
+app.use('/api/login', loginRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/produtos', produtosRoutes);
 
 // Serve arquivos estáticos da build do React
 app.use(express.static(path.join(__dirname, '../frontend/build')));
