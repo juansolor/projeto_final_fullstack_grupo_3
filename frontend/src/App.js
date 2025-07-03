@@ -17,7 +17,7 @@ import TrabalheConosco from './pages/subpages/TrabalheConosco';
 import Lojas from './pages/subpages/Lojas';
 
 import Header from './components/header';
-import Footer from './components/Footer';
+import Footer from './components/footer';
 
 function App() {
   return (
