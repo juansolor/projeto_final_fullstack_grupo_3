@@ -16,25 +16,25 @@ const produtos = [
     info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
   },
   {
-    title: "Byteware Mouse",
-    description: "Mouse óptico de alta precisão.",
+    title: "Projetor portátil",
+    description: "Projetor de holograma de alta definição.",
     nome: "Byteware",
     img: require("../assets/Byteware-produto1.jpg"),
-    price: "R$ 659,00",
+    price: "R$ 6.659,00",
     desconto: "47% Desconto",
     stars: 4,
-    details: "Mouse óptico, 16000 DPI, RGB, 7 botões programáveis.",
+    details: "Hologramas em 2 e 3D, conectividade via USB.",
     info: "Compatível com Windows, Mac. Garantia 1 ano."
   },
   {
-    title: "NexaCore Teclado",
-    description: "Teclado mecânico retroiluminado.",
+    title: "Motherboard",
+    description: "Motherboard de alta eficiência.",
     nome: "NexaCore",
     img: require("../assets/NexaCore - produto1.jpg"),
-    price: "R$ 859,00",
+    price: "R$ 2.859,00",
     desconto: "50% Desconto",
     stars: 5,
-    details: "Teclado mecânico, switches blue, RGB, anti-ghosting.",
+    details: "Suporte para memórias DDR5 com altas frequências e velocidades, slots PCIe 5.0 para placas de vídeo e SSDs, múltiplos slots M.2 para armazenamento de alta velocidade.",
     info: "Compatível com Windows, Mac. Garantia 1 ano."
   },
   {

@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
 <nav className="navbar navbar-expand-lg navbar-custom fixed-top shadow">
   <div className="container-fluid">
-    <Link className="navbar-brand" to="/">E-Commerce</Link>
+    <Link className="navbar-brand" to="/"></Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -43,7 +43,7 @@ const Navbar = () => {
           <button className="nav-link active btn btn-link" style={{textDecoration: 'none', color: '#8439CC', fontWeight: 700, fontSize: 18}} onClick={() => handlePageChange('/')}>Home</button>
         </li>
         <li className="nav-item">
-          <button className="nav-link btn btn-link" style={{textDecoration: 'none', color: '#3FD37D', fontWeight: 700, fontSize: 18}} onClick={() => handlePageChange('/ofertas')}>Promocoes</button>
+          <button className="nav-link btn btn-link" style={{textDecoration: 'none', color: '#3FD37D', fontWeight: 700, fontSize: 18}} onClick={() => handlePageChange('/ofertas')}>Ofertas</button>
         </li>
         <li className="nav-item">
           <button className="nav-link btn btn-link" style={{textDecoration: 'none', color: '#8439CC', fontWeight: 700, fontSize: 18}} onClick={() => handlePageChange('/pages/subpages/Lojas')}>Lojas</button>

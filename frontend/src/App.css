@@ -145,3 +145,11 @@ footer li {
     margin: 0;
     align-items: center;
 }
+
+
+.container-mt-5 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centraliza os cards */
+  gap: 20px; /* espaçamento entre os cards */
+}

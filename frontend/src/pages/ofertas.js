@@ -4,44 +4,44 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const ofertas = [
   {
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
+    title: "Laptop Quanttum",
+    description: "notebook. ",
     nome: "Auragear",
     img: require("../assets/Quanttum-produto1.jpg"),
     price: "R$ 5.000,99",
     desconto: "20% Desconto",
     stars: 5,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
+    details: "Notebook com tela de 14 plg. processador de última geração, SSD..",
+    info: "Compatível todos os SO."
   },
   {
     
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
+    title: "Processador QuantumPulse",
+    description: "processador.",
     nome: "Auragear",
     img: require("../assets/Quanttum-produto2.jpg"),
     price: "R$ 5.000,99",
     desconto: "20% Desconto",
     stars: 4,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
+    details: "processador de última geração.",
+    info: "Compatível com todas as MB."
   },
   {
     
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
+    title: "Servidor quântico",
+    description: "Servidor remoto.",
     nome: "Auragear",
     img: require("../assets/quanttum-produto3.jpg"),
     price: "R$ 5.000,99",
     desconto: "20% Desconto",
     stars: 3,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
+    details: "Servidor remóto com tecnologia quântica.",
+    info: "Compatível todos os SO."
   },
   {
     
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
+    title: "Optiview",
+    description: "Monitor 4K.",
     nome: "Auragear",
     img: require("../assets/optiview-produto1.jpg"),
     price: "R$ 5.000,99",
@@ -52,15 +52,15 @@ const ofertas = [
   },
     {
     
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
+    title: "Kit Optaview",
+    description: "Kit inalámbrico de óculos, monitor e webcam.",
     nome: "Auragear",
     img: require("../assets/optiview-produto2.jpg"),
     price: "R$ 5.000,99",
     desconto: "20% Desconto",
     stars: 1,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
+    details: "óculos de alta resolução, câmera web 4K e monitor de 30 plg. full HD. Todos os dispositivos com conectividade BlueTooth",
+    info: "Compatível com todos os SO."
   },
 ];
 
@@ -86,7 +86,7 @@ const carouselImages = [
 const Ofertas = () => {
   return (
     <div className="container mt-5">
-      <h1>Ofertas</h1>
+      <h1 className="text-center mb-4" style={{ color: "#d90000", fontWeight: 700, fontSize: 42, fontFamily: 'Montserrat, Arial, sans-serif' }}>Ofertas! </h1>
       <p>Aproveite as seguintes Promoções:</p>
       <div className="row">
         {ofertas.map((oferta, idx) => (
@@ -94,13 +94,13 @@ const Ofertas = () => {
             <div className="card h-100">
               <img src={oferta.img} className="card-img-top" alt={oferta.title} />
               <div className="card-body">
-                <h5 className="card-title">{oferta.title}</h5>
+                <h5 className="card-title" style={{ color: "#8439CC", fontWeight: 600 }}>{oferta.title}</h5>
                 <p className="card-text">{oferta.description}</p>
-                <p className="card-text">
+                <p className="card-text" >
                   <strong>{oferta.price}</strong>
                 </p>
-                <span className="badge bg-success mb-2">{oferta.desconto}</span>
-                <Link to={`/oferta/${idx}`} className="btn btn-primary">
+                <span className="badge bg-success mb-2" style={{ background: "#3FD37D", color: "#fff"}}>{oferta.desconto}</span>
+                <Link to={`/oferta/${idx}`} className="btn btn-primary" style={{ background: "#3FD37D", color: "#fff", fontWeight: 600, borderRadius: 8 }}>
                   Ver detalhes
                 </Link>
               </div>
