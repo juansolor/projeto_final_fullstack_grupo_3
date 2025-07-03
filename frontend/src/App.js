@@ -16,7 +16,7 @@ import Atendimento from './pages/subpages/Atendimento';
 import TrabalheConosco from './pages/subpages/TrabalheConosco';
 import Lojas from './pages/subpages/Lojas';
 
-import Header from './components/Header';
+import Header from './components/header';
 import Footer from './components/Footer';
 
 function App() {
