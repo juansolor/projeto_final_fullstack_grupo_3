@@ -1,45 +1,50 @@
-import { Routes, Route } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './pages/home';
-import Produtos from './pages/produto';
+import './App.css';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import AdminPage from './pages/AdminPage';
+import UserPage from './pages/UserPage';
+import OfertasPage from './pages/OfertasPage';
+import ProdutoPage from './pages/ProdutoPage';
+import HistoricoCompras from './pages/HistoricoCompras';
 import Carrinho from './pages/carrinho';
-import Users from './pages/user';
-import Navbar from './components/navbar';
-import Registros from './pages/Registro';
-import Ofertas from './pages/ofertas'; 
-import Footer from './components/footer';
-import Header from './components/header';
-import Lojas from './pages/subpages/Lojas';
+
+// Subpages
 import Atendimento from './pages/subpages/Atendimento';
 import TrabalheConosco from './pages/subpages/TrabalheConosco';
-import SuperUser from './pages/SuperUser';
+import Lojas from './pages/subpages/Lojas';
+
+import Header from './components/header';
+import Footer from './components/footer';
 
 function App() {
   return (
-    <>
+    <Router>
       <Header />
-      <div className="header-placeholder"></div>
-      <Navbar />
-      <div style={{ height: 70 }}></div>
-      <div className="container" style={{ maxWidth: 1000 }}>
+      
+      <div className="d-flex flex-column min-vh-100">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/produto" element={<Produtos />} />
-          <Route path="/ofertas" element={<Ofertas />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/user" element={<UserPage />} />
+          <Route path="/offers" element={<OfertasPage />} />
+          <Route path="/product/:id" element={<ProdutoPage />} />
+          <Route path="/historico-compras" element={<HistoricoCompras />} />
           <Route path="/carrinho" element={<Carrinho />} />
-          <Route path="/user" element={<Users />} />
-          <Route path="/registro" element={<Registros />} />
-          <Route path="/pages/subpages/Lojas" element={<Lojas />} />
-          <Route path="/pages/subpages/Atendimento" element={<Atendimento />} />
-          <Route path="/pages/subpages/TrabalheConosco" element={<TrabalheConosco />} />
-          <Route path="/SuperUser" element={<SuperUser />} />
-          {/* Adicione outras rotas conforme necessário */}
+
+          {/* Subpages */}
+          <Route path="/atendimento" element={<Atendimento />} />
+          <Route path="/trabalhe-conosco" element={<TrabalheConosco />} />
+          <Route path="/lojas" element={<Lojas />} />
+          
         </Routes>
       </div>
       <Footer />
-      <div style={{ height: 70 }}></div>
-    </>
+    </Router>
   );
 }
 

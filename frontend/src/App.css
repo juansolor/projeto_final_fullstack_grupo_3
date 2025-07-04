@@ -13,41 +13,7 @@
   }
 }
 
-.App-header {
-  background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #fff;
-  min-height: auto;
-}
-
-.navbar-custom {
-  background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
-  margin-top: 60px;
-  z-index: 20;
-}
-
-.navbar-custom .navbar-brand,
-.navbar-custom .nav-link {
-  color: #fff !important;
-  font-weight: 500;
-}
-
-.navbar-custom .nav-link.active,
-.navbar-custom .nav-link:focus,
-.navbar-custom .nav-link:hover {
-  color: #000 !important;
-  background: rgba(255,255,255,0.15);
-  border-radius: 5px;
-}
-
 body {
-  background-color: #111;
-  padding-top: 50px; /* Ajusta según el alto del header */
 }
 
 .App-link {
@@ -63,85 +29,19 @@ body {
   }
 }
 
-
-.footer-horizontal {
-    width: 100vw;
-    background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
-    color: #fff;
-    padding: 10px 0;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+/* Custom Header Styles */
+.custom-bg-gray-100 {
+  background-color: #f8f9fa !important; /* Very light gray */
 }
 
-.footer-content {
-  display: flex;
-  flex-wrap: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 16px;
-  width: 100%;
-  gap: 32px;
-  box-sizing: border-box;
+.custom-bg-gradient-green-blue {
+  background: linear-gradient(to right, #28a745, #007bff) !important; /* Green to Blue Gradient */
 }
 
-.footer-content > * {
-  flex: 1 1 180px;
-  min-width: 180px;
-}
-footer ul {
-  list-style: none;
-  padding: 0;
-}
-footer li {
-  margin-bottom: 8px;
-}
-.footer-content img {
-    margin-bottom: 10px;
+.custom-bg-gray-800 {
+  background-color: #343a40 !important; /* Very dark gray, almost black */
 }
 
-
-.header-solid {
-    width: 100vw;
-    background:  #3FD37D 100%;
-    color: #fff;
-    padding: 10px 0;
-    margin: 0;
-    position: fixed;
-    top: 0;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    z-index: 10;
-}
-
-.header-content {
-  display: flex;
-  flex-wrap: row;
-  justify-content: space-between;
-  align-items:center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0px 16px;
-  width: 100%;
-  gap: 32px;
-  box-sizing: border-box;
-}
-
-.header-placeholder {
-    height: 50px; /* Ajusta este valor al alto real de tu header */
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px; /* Espacio entre los links */
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    align-items: center;
+.text-white {
+  color: #fff !important;
 }
