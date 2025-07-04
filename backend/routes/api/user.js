@@ -1,11 +1,5 @@
 const express = require('express');
 const router = express.Router();
-<<<<<<< HEAD
-
-// Add user-related routes here
-
-module.exports = router;
-=======
 const db = require('../../models');
 const Usuario = db.Usuario;
 
@@ -29,4 +23,3 @@ router.get('/', async (req, res) => {
 });
 
 module.exports = router;
->>>>>>> origin/main

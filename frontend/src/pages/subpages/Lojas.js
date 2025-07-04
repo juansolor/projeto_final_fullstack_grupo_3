@@ -1,13 +1,8 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Lojas = () => {
   return (
-<<<<<<< HEAD
-    <div className="container mt-5">
-      <h2>Nossas Lojas Físicas</h2>
-      <p>Encontre a loja mais próxima de você.</p>
-      {/* Adicionar informações sobre as lojas físicas, endereço, mapa, horário de funcionamento */}
-=======
     <div className="p-3">
       <h4 className="mb-3">Lojas</h4>
       <p className="mb-3">
@@ -50,13 +45,8 @@ const Lojas = () => {
           </a>
         </div>
       </div>
->>>>>>> origin/main
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default Lojas;
-=======
-export default Lojas;
->>>>>>> origin/main

@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-
-const HistoricoCompras = () => {
-  return (
-    <div className="container mt-5">
-      <h2>Histórico de Compras</h2>
-      <p>Aqui você verá seu histórico de compras.</p>
-=======
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -54,13 +45,8 @@ const HistoricoCompras = ({ usuarioId }) => {
           </div>
         ))
       )}
->>>>>>> origin/main
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default HistoricoCompras;
-=======
-export default HistoricoCompras;
->>>>>>> origin/main
