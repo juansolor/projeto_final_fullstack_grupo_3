@@ -1,108 +1,93 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const ofertas = [
-  {
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
-    nome: "Auragear",
-    img: require("../assets/Quanttum-produto1.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 5,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
-  },
-  {
-    
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
-    nome: "Auragear",
-    img: require("../assets/Quanttum-produto2.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 4,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
-  },
-  {
-    
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
-    nome: "Auragear",
-    img: require("../assets/quanttum-produto3.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 3,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
-  },
-  {
-    
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
-    nome: "Auragear",
-    img: require("../assets/optiview-produto1.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 2,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
-  },
-    {
-    
-    title: "Auragear Headset",
-    description: "Headset gamer RGB com som surround.",
-    nome: "Auragear",
-    img: require("../assets/optiview-produto2.jpg"),
-    price: "R$ 5.000,99",
-    desconto: "20% Desconto",
-    stars: 1,
-    details: "Headset gamer RGB, som surround, microfone removível, conexão USB.",
-    info: "Compatível com PC, PS4, Xbox. Garantia 1 ano."
-  },
+// Productos locales como fallback
+const ofertasFallback = [
+  "Auragear-produto2.jpg", "Auragear-produto3.jpg", "Aureagerar-produto1.jpg", "Auragear-logo.jpg",
+  "Byteware-produto1.jpg", "Byteware-produto2.jpg", "Byteware-produto3.jpg", "Bytewave - logo.jpg",
+  "gamerlink-produto.jpg", "gamerlink-logo.jpg",
+  "NexaCore - produto1.jpg", "NexaCore - produto2.jpg", "NexaCore-produto3.jpg", "NexaCore-produto4.jpg", "NexaCore - logo.jpg",
+  "optiview-produto1.jpg", "optiview-produto2.jpg", "optiview-produto3.jpg", "optiview-logo.jpg",
+  "PeriTech-produto1.jpg", "PeriTech-produto2.jpg", "PeriTech-logo.jpg",
+  "Quanttum-produto1.jpg", "Quanttum-produto2.jpg", "quanttum-produto3.jpg", "quanttum-logo.jpg",
+  "soundpulse-produto1.jpg", "soundpulse-logo.jpg",
+  "e-commerce.jpg", "logo.png"
 ];
 
-const carouselImages = [
-  require("../assets/Auragear-produto2.jpg"),
-  require("../assets/Byteware-produto1.jpg"),
-  require("../assets/NexaCore - produto1.jpg"),
-  require("../assets/soundpulse-produto1.jpg"),
-  require("../assets/Auragear-produto3.jpg"),
-  require("../assets/Byteware-produto2.jpg"),
-  require("../assets/Byteware-produto3.jpg"),
-  require("../assets/gamerlink-logo.jpg"),
-  require("../assets/PeriTech-produto1.jpg"),
-  require("../assets/Byteware-produto3.jpg"),
-  require("../assets/PeriTech-produto2.jpg"),
-  require("../assets/Quanttum-produto2.jpg"),
-  require("../assets/Quanttum-produto1.jpg"),
-  require("../assets/quanttum-produto3.jpg")
+const titulos = [
+  "Headset Gamer", "Mouse Óptico", "Teclado Mecânico", "Webcam HD", "Monitor LED", "Impressora Wi-Fi", "Caixa de Som Bluetooth", "Notebook Pro", "SSD Externo", "Placa de Vídeo", "Memória RAM", "Hub USB", "Microfone Condensador", "Cadeira Gamer", "Roteador Wi-Fi", "Smartwatch", "Tablet 10''", "Fone Bluetooth", "Carregador Turbo", "HD Externo", "Teclado Numérico", "Mousepad RGB", "Adaptador HDMI", "Controle Wireless", "Pen Drive 64GB", "Câmera de Segurança", "Projetor Portátil", "Estabilizador", "Fonte ATX"
 ];
 
+const descricoes = [
+  "Produto de alta qualidade para gamers exigentes.",
+  "Ideal para trabalho e lazer, com design moderno.",
+  "Tecnologia de ponta e máxima performance.",
+  "Compatível com diversos dispositivos.",
+  "Garantia de 1 ano e suporte nacional."
+];
 
+const descontos = ["10% Desconto", "15% Desconto", "20% Desconto", "25% Desconto", "30% Desconto", "35% Desconto", "40% Desconto", "45% Desconto", "50% Desconto"];
+
+function randomFrom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+const ofertasLocal = ofertasFallback.map((img, idx) => ({
+  title: titulos[idx % titulos.length],
+  description: randomFrom(descricoes),
+  img: require(`../assets/${img}`),
+  price: `R$ ${(Math.random() * 2000 + 100).toFixed(2)}`.replace('.', ','),
+  desconto: randomFrom(descontos),
+  stars: 5,
+  details: "Detalhes do produto aqui.",
+  info: "Informações adicionais aqui."
+}));
+
+// Eliminar los dos últimos productos (Fonte ATX e Headset Gamer) del array de ofertas
+const ofertasFallbackFiltradas = ofertasLocal.slice(0, ofertasLocal.length - 2);
 
 const Ofertas = () => {
+  const navigate = useNavigate();
+  const [ofertas, setOfertas] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/produtos")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setOfertas(data);
+        } else {
+          setOfertas(ofertasFallbackFiltradas);
+        }
+      })
+      .catch(() => setOfertas(ofertasFallbackFiltradas));
+  }, []);
+
+  const handleComprar = (oferta) => {
+    // Navega a la página de produto y luego a carrinho
+    navigate("/produto", { state: { produto: oferta, comprar: true } });
+  };
+
   return (
     <div className="container mt-5">
       <h1>Ofertas</h1>
       <p>Aproveite as seguintes Promoções:</p>
-      <div className="row">
+      <div className="row justify-content-center g-4">
         {ofertas.map((oferta, idx) => (
-          <div className="col-md-4 mb-4" key={idx}>
-            <div className="card h-100">
-              <img src={oferta.img} className="card-img-top" alt={oferta.title} />
-              <div className="card-body">
-                <h5 className="card-title">{oferta.title}</h5>
-                <p className="card-text">{oferta.description}</p>
-                <p className="card-text">
-                  <strong>{oferta.price}</strong>
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch" key={idx}>
+            <div className="card h-100 shadow-sm border-0" style={{ minWidth: 250 }}>
+              <img src={oferta.img || oferta.image} className="card-img-top p-3" alt={oferta.title || oferta.name} style={{ height: 180, objectFit: 'contain', background: '#f8f9fa' }} />
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title mb-2" style={{ fontWeight: 700 }}>{oferta.title || oferta.name}</h5>
+                <p className="card-text mb-1" style={{ minHeight: 40 }}>{oferta.description}</p>
+                <span className="badge mb-2 align-self-start" style={{ backgroundColor: '#d90000', color: '#fff', fontSize: '1em' }}>{oferta.desconto || oferta.promotionalPrice ? "Oferta" : ""}</span>
+                <p className="card-text mb-2" style={{ fontSize: '1.2em', fontWeight: 600 }}>
+                  <strong>{oferta.price || (oferta.promotionalPrice ? `R$ ${oferta.promotionalPrice}` : `R$ ${oferta.price}`)}</strong>
                 </p>
-                <span className="badge bg-success mb-2">{oferta.desconto}</span>
-                <Link to={`/oferta/${idx}`} className="btn btn-primary">
-                  Ver detalhes
-                </Link>
+                <div className="mt-auto">
+                  <button className="btn btn-success w-100" onClick={() => handleComprar(oferta)}>
+                    Comprar
+                  </button>
+                </div>
               </div>
             </div>
           </div>

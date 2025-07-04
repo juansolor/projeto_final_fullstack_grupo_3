@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 
-const produtos = [
+// Productos locales como fallback
+const produtosFallback = [
   {
     title: "Auragear Headset",
     description: "Headset gamer RGB com som surround.",
@@ -69,6 +70,7 @@ const carouselImages = [
 
 const Home = () => {
   const navigate = useNavigate();
+  const [produtos, setProdutos] = useState([]);
 
   useEffect(() => {
     // Inicializa el carrusel manualmente para asegurar el autoplay
@@ -99,6 +101,20 @@ const Home = () => {
     return () => {
       if (carouselInstance && carouselInstance.dispose) carouselInstance.dispose();
     };
+  }, []);
+
+  useEffect(() => {
+    // Traer productos de la API
+    fetch("/api/produtos")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setProdutos(data);
+        } else {
+          setProdutos(produtosFallback);
+        }
+      })
+      .catch(() => setProdutos(produtosFallback));
   }, []);
 
   const handleVerProduto = (produto) => {
@@ -139,17 +155,17 @@ const Home = () => {
           {produtos.map((produto, idx) => (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" key={idx}>
               <div className="card shadow-sm border-0 position-relative" style={{ width: "18rem", borderRadius: 16 }}>
-                <span className="badge bg-danger position-absolute" style={{ top: 10, left: 10, fontSize: 14 }}>{produto.desconto}</span>
-                <img src={produto.img} className="card-img-top" alt={produto.title} style={{ height: 180, objectFit: "cover", borderTopLeftRadius: 16, borderTopRightRadius: 16 }} />
+                <span className="badge bg-danger position-absolute" style={{ top: 10, left: 10, fontSize: 14 }}>{produto.desconto || produto.promotionalPrice ? "Oferta" : ""}</span>
+                <img src={produto.img || produto.image} className="card-img-top" alt={produto.title || produto.name} style={{ height: 180, objectFit: "cover", borderTopLeftRadius: 16, borderTopRightRadius: 16 }} />
                 <div className="card-body" style={{ background: "#fff", borderBottomLeftRadius: 16, borderBottomRightRadius: 16 }}>
                   <div className="mb-2">
-                    {Array.from({ length: produto.stars }).map((_, i) => (
+                    {Array.from({ length: produto.stars || 5 }).map((_, i) => (
                       <span key={i} style={{ color: "#FFD700", fontSize: 18 }}>★</span>
                     ))}
                   </div>
-                  <h5 className="card-title" style={{ color: "#8439CC", fontWeight: 600 }}>{produto.title}</h5>
+                  <h5 className="card-title" style={{ color: "#8439CC", fontWeight: 600 }}>{produto.title || produto.name}</h5>
                   <p className="card-text" style={{ color: "#333", minHeight: 40 }}>{produto.description}</p>
-                  <div className="fw-bold text-danger mb-2" style={{ fontSize: 20 }}>{produto.price}</div>
+                  <div className="fw-bold text-danger mb-2" style={{ fontSize: 20 }}>{produto.price || (produto.promotionalPrice ? `R$ ${produto.promotionalPrice}` : `R$ ${produto.price}`)}</div>
                   <button className="btn w-100" style={{ background: "#3FD37D", color: "#fff", fontWeight: 600, borderRadius: 8 }} onClick={() => handleVerProduto(produto)}>
                     Ver produto
                   </button>
