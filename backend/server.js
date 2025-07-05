@@ -21,6 +21,9 @@ const PORT = process.env.PORT || 3001; // porta do backend
 app.use(cors()); // permite requisições do front-end (CORS)
 app.use(express.json()); // permite receber JSON no body das requisições
 
+// Serve arquivos estáticos da pasta uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 // Rotas
 app.use('/api/usuarios', usuariosRoutes); // usa as rotas de usuários com prefixo /api/usuarios
 app.use('/api/imagens', imagensRoutes);

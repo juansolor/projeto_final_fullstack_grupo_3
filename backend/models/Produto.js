@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
     nome: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    freeShipping: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   });
   return Produto;
