@@ -60,6 +60,16 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// DELETE /api/carrinho - remove todos os produtos do carrinho
+router.delete('/', async (req, res) => {
+  try {
+    await Carrinho.destroy({ where: {} });
+    res.json({ message: 'Carrinho esvaziado com sucesso' });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao esvaziar carrinho' });
+  }
+});
+
 // POST /api/carrinho/checkout - finalizar compra
 // Espera req.user.id (usuário autenticado)
 router.post('/checkout', async (req, res) => {
@@ -81,8 +91,7 @@ router.post('/checkout', async (req, res) => {
       total,
       usuarioId,
     });
-    // Limpa o carrinho
-    await Carrinho.destroy({ where: {} });
+    // Não limpa mais o carrinho aqui, isso é feito via DELETE /api/carrinho após pagamento
     res.status(201).json({ message: 'Compra finalizada com sucesso', pedido });
   } catch (error) {
     res.status(500).json({ error: 'Erro ao finalizar compra' });

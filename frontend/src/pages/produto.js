@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
@@ -10,6 +10,10 @@ const Produto = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const produto = location.state?.produto;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const handleComprar = async () => {
     // Extrae y normaliza los datos para el backend
@@ -29,6 +33,16 @@ const Produto = () => {
     } catch (err) {
       alert("Erro ao adicionar produto ao carrinho");
     }
+  };
+
+  // Función para obtener la URL de la imagen del producto
+  const getImageUrl = (produto) => {
+    if (!produto) return '';
+    if (typeof produto.img === 'string') return produto.img;
+    if (produto.img?.default) return produto.img.default;
+    if (produto.image) return `/uploads/${produto.image}`;
+    if (produto.imagem) return `/uploads/${produto.imagem}`;
+    return '/assets/default.jpg';
   };
 
   if (!produto) {
@@ -51,7 +65,7 @@ const Produto = () => {
         <div className="row bg-white p-4 rounded-3 align-items-center mb-4 shadow-sm">
           <div className="col-md-5 text-center">
             <img
-              src={produto.img}
+              src={getImageUrl(produto)}
               alt={produto.title}
               style={{ maxWidth: 350, maxHeight: 250, objectFit: "contain" }}
             />

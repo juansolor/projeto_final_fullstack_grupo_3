@@ -43,7 +43,7 @@ const Navbar = () => {
           <button className="nav-link active btn btn-link" style={{textDecoration: 'none', color: '#8439CC', fontWeight: 700, fontSize: 18}} onClick={() => handlePageChange('/')}>Home</button>
         </li>
         <li className="nav-item">
-          <button className="nav-link btn btn-link" style={{textDecoration: 'none', color: '#3FD37D', fontWeight: 700, fontSize: 18}} onClick={() => handlePageChange('/ofertas')}>Promocoes</button>
+          <button className="nav-link btn btn-link" style={{textDecoration: 'none', color: '#3FD37D', fontWeight: 700, fontSize: 18}} onClick={() => handlePageChange('/ofertas')}>Produtos</button>
         </li>
         <li className="nav-item">
           <button className="nav-link btn btn-link" style={{textDecoration: 'none', color: '#8439CC', fontWeight: 700, fontSize: 18}} onClick={() => handlePageChange('/pages/subpages/Lojas')}>Lojas</button>

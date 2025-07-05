@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
@@ -9,6 +10,7 @@ const Carrinho = () => {
   const [carrinho, setCarrinho] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCarrinho = async () => {
@@ -22,7 +24,34 @@ const Carrinho = () => {
       }
     };
     fetchCarrinho();
-  }, []);
+    // Escuchar evento de storage para actualizar si otro tab borra el carrito
+    const handleStorage = (e) => {
+      if (e.key === 'carrinho') fetchCarrinho();
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, [window.location.pathname]); // Se ejecuta cada vez que se navega a /carrinho
+
+  // Permite actualizar manualmente el carrito tras el pago
+  const atualizarCarrinho = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(`${API_URL}/api/carrinho`);
+      setCarrinho(res.data);
+    } catch (err) {
+      setError("Erro ao carregar o carrinho");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Función para obtener la URL de la imagen del producto
+  const getImageUrl = (produto) => {
+    if (produto.img) return produto.img; // import local
+    if (produto.image) return `/uploads/${produto.image}`;
+    if (produto.imagem) return `/uploads/${produto.imagem}`;
+    return '/assets/default.jpg'; // fallback
+  };
 
   // Actualizar cantidad
   const handleUpdate = async (id, quantidade) => {
@@ -48,21 +77,16 @@ const Carrinho = () => {
   };
 
   // Finalizar compra
-  const handleCheckout = async () => {
-    try {
-      // Obtener usuario autenticado de localStorage
-      const storedUser = localStorage.getItem("user");
-      const usuarioId = storedUser ? JSON.parse(storedUser).id : null;
-      if (!usuarioId) {
-        alert("Você precisa estar logado para finalizar a compra.");
-        return;
-      }
-      await axios.post(`${API_URL}/api/carrinho/checkout`, { usuarioId });
-      setCarrinho([]);
-      window.alert("Compra realizada com sucesso!");
-    } catch (err) {
-      alert("Erro ao finalizar a compra");
+  const handleCheckout = () => {
+    // Verifica si el usuario está logueado
+    const user = localStorage.getItem('user');
+    if (!user) {
+      alert('Você precisa estar logado para pagar.');
+      navigate('/user');
+      return;
     }
+    // Navegar a la página de pagamento y pasar el carrito
+    navigate("/pagamento", { state: { carrinho } });
   };
 
   const subtotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
@@ -74,7 +98,7 @@ const Carrinho = () => {
       <div className="container py-4">
         {/* Progresso de compra */}
         <div className="mb-4 text-center">
-          <img src={require("../assets/logo.png")} alt="Progresso" style={{ width: '120px', display: 'block', margin: '0 auto' }} />
+          <img src={"/assets/logo.png"} alt="Progresso" style={{ width: '120px', display: 'block', margin: '0 auto' }} />
         </div>
         <h2 className="mb-4" style={{ color: '#d90000', fontWeight: 700 }}>Meu Carrinho</h2>
         {loading ? <div>Carregando...</div> : error ? <div>{error}</div> : (
@@ -94,7 +118,7 @@ const Carrinho = () => {
               <tbody>
                 {carrinho.length > 0 ? carrinho.map((item) => (
                   <tr key={item.id}>
-                    <td><img src={item.img} alt={item.title} style={{ width: 60, height: 40, objectFit: 'contain' }} /></td>
+                    <td><img src={getImageUrl(item)} alt={item.title || item.name} style={{ width: 60, height: 40, objectFit: 'contain' }} /></td>
                     <td>{item.title}</td>
                     <td>R${item.preco.toFixed(2)}</td>
                     <td>
@@ -133,7 +157,13 @@ const Carrinho = () => {
                 <span>Total:</span>
                 <span>R${total.toFixed(2)} + Entrega</span>
               </div>
-              <button className="btn btn-success w-100 mt-3" style={{fontWeight: 700, fontSize: 18}} onClick={handleCheckout}>Pagar Produto</button>
+              <button 
+                className="btn btn-compra w-100 mt-3" 
+                style={{ background: 'linear-gradient(90deg, #3FD37D 0%, #8439CC 100%)', border: 'none', color: 'white' }}
+                onClick={handleCheckout}
+              >
+                Pagar Produto
+              </button>
             </div>
           </div>
         </div>

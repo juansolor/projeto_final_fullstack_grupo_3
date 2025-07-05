@@ -14,6 +14,7 @@ import Lojas from './pages/subpages/Lojas';
 import Atendimento from './pages/subpages/Atendimento';
 import TrabalheConosco from './pages/subpages/TrabalheConosco';
 import SuperUser from './pages/SuperUser';
+import Pagamento from './pages/Pagamento';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/produto" element={<Produtos />} />
           <Route path="/ofertas" element={<Ofertas />} />
           <Route path="/carrinho" element={<Carrinho />} />
+          <Route path="/pagamento" element={<Pagamento />} />
           <Route path="/user" element={<Users />} />
           <Route path="/registro" element={<Registros />} />
           <Route path="/pages/subpages/Lojas" element={<Lojas />} />
@@ -38,7 +40,6 @@ function App() {
         </Routes>
       </div>
       <Footer />
-      <div style={{ height: 70 }}></div>
     </>
   );
 }

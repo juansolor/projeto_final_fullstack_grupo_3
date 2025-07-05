@@ -148,8 +148,21 @@ Acesse: [http://localhost:3000/](http://localhost:3000/)
 
 ---
 
+## 📄 Documentação Detalhada
+
+https://deepwiki.com/juansolor/projeto_final_fullstack_grupo_3
+
+---
+
 ## 👥 Grupo 3 — Toti Diversidade
 
 Projeto desenvolvido para a formação Fullstack Toti.
 
+Integrantes:
+
+- Juan Solorzano Ojeda
+- Gabriel M. López
+- Rimaud Djidonou
+- Daniel Villegas
+- Alvaro Mauricio Gomez
 ---
