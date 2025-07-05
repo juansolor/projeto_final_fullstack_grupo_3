@@ -52,7 +52,7 @@ const Header = () => {
                 placeholder="Pesquisar produtos..."
                 aria-label="Search"
               />
-              <Button variant="outline-secondary">Buscar</Button>
+              <Button variant="primary">Buscar</Button>
             </InputGroup>
           </div>
 
