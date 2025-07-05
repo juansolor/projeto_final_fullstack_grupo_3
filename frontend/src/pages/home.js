@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 
-// Productos locales como fallback
+// Productos estáticos, imágenes siempre en /public/assets
 const produtosFallback = [
   {
     title: "Auragear Headset",
@@ -70,10 +70,11 @@ const carouselImages = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const [produtos, setProdutos] = useState([]);
+  // Usar apenas os produtos estáticos
+  const [produtos] = useState(produtosFallback);
 
   useEffect(() => {
-    // Inicializa el carrusel manualmente para asegurar el autoplay
+    // Inicializa o carrossel manualmente para garantir autoplay
     let carouselInstance = null;
     (async () => {
       const carouselEl = document.getElementById('mainCarousel');
@@ -103,20 +104,6 @@ const Home = () => {
     };
   }, []);
 
-  useEffect(() => {
-    // Traer productos de la API
-    fetch("/api/produtos")
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data) && data.length > 0) {
-          setProdutos(data);
-        } else {
-          setProdutos(produtosFallback);
-        }
-      })
-      .catch(() => setProdutos(produtosFallback));
-  }, []);
-
   const handleVerProduto = (produto) => {
     navigate("/produto", { state: { produto } });
   };
@@ -124,7 +111,7 @@ const Home = () => {
   return (
     <div style={{ background: "#f5f5f5", minHeight: "100vh" }}>
       <div className="container py-4">
-        {/* Carrusel próprio com imagens de assets */}
+        {/* Carrossel com imagens de assets */}
         <div className="row align-items-center mb-4">
           <div className="col-12 col-md-10 mx-auto">
             <div id="mainCarousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="false">
