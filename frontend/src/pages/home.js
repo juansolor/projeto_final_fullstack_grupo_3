@@ -214,6 +214,16 @@ const Home = () => {
           ))}
         </div>
 
+        {/* Banners de Promoção */}
+        <div className="row justify-content-center g-4 mb-5">
+          <div className="col-12 col-md-6 d-flex justify-content-center">
+            <img src="http://localhost:3001/uploads/Promo/2.png" alt="Promo Banner 1" className="img-fluid rounded-4 shadow" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
+          </div>
+          <div className="col-12 col-md-6 d-flex justify-content-center">
+            <img src="http://localhost:3001/uploads/Promo/3.png" alt="Promo Banner 2" className="img-fluid rounded-4 shadow" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
+          </div>
+        </div>
+
         {/* Seção de Filtros + Produtos */}
         <h2 className="text-center mb-4" style={{ color: "#d90000", fontWeight: 700, fontSize: 32 }}>Nossos Produtos</h2>
         <div className="row">
