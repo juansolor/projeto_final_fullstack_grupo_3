@@ -1,21 +1,33 @@
+// frontend/src/components/Header.js
+
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-
+// No importamos un Header.css porque usaremos el CSS global
 
 const Header = () => {
-    return (
-        <header className="header-solid">
-            <div className="header-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-                <img src={logo} alt="Logo Grupo 3" style={{ height: 56, marginRight: 16, borderRadius: 8 }} />
-                <h1 className="logo" style={{ margin: 0, fontWeight: 700, fontSize: 32, color: '#fff', letterSpacing: 1, textAlign: 'left' }}>E-Commerce Toti | Grupo 3</h1>
-                <nav className="navbar">
-                    <ul className="nav-links">
+  return (
+    // El <header> envuelve ambas franjas y lo hacemos fijo
+    <header className="header-fijo">
+      {/* === FRANJA VERDE SUPERIOR === */}
+      <div className="franja-superior">
+        <div className="contenido-limitado">
+          {/* Grupo Izquierdo: Logo y Título */}
+          <div className="header-izquierda">
+            <img src={logo} alt="Logo Grupo 3" className="logo-img" />
+            <h1 className="logo-texto">E-Commerce Toti | Grupo 3</h1>
+          </div>
 
-                    </ul>
-                </nav>
-            </div>
-        </header>
-    );
-}
+          {/* Grupo Derecho: Iconos */}
+          <div className="header-derecha">
+            <Link to="/carrinho" className="header-icono">🛒 Carrito</Link>
+            <Link to="/login" className="header-icono">👤 Perfil</Link>
+          </div>
+        </div>
+      </div>
+
+    </header>
+  );
+};
+
 export default Header;

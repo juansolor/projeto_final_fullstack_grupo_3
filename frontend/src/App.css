@@ -27,8 +27,8 @@
 
 .navbar-custom {
   background: linear-gradient(90deg, #8439CC 0%, #3FD37D 100%);
-  margin-top: 60px;
-  z-index: 20;
+  margin-top: 100px;
+  z-index: 100%;
 }
 
 .navbar-custom .navbar-brand,
@@ -47,7 +47,8 @@
 
 body {
   background-color: #111;
-  padding-top: 50px; /* Ajusta según el alto del header */
+  /* El nuevo padding debe ser igual o mayor a la altura total de tu nuevo header */
+  padding-top: 170px; /* Prueba con este valor, ajústalo si es necesario */
 }
 
 .App-link {
@@ -144,4 +145,98 @@ footer li {
     padding: 0;
     margin: 0;
     align-items: center;
+}
+
+/* =============================================== */
+/* === ESTILOS PARA EL HEADER DE DOS FRANJAS === */
+/* =============================================== */
+
+/* Contenedor principal del header que lo fija arriba */
+.header-fijo {
+    width: 100%;
+    position: fixed; /* Fija el header en la parte superior */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Asegura que esté por encima de otros contenidos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Una sombra para que destaque */
+}
+
+/* --- FRANJA VERDE SUPERIOR --- */
+.franja-superior {
+    background-color: #3FD37D; /* Color verde */
+    color: white;
+    padding: 18px 0; /* Aumenta la altura */
+}
+
+/* Contenedor que limita el ancho y centra el contenido */
+.contenido-limitado {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: space-between; /* Empuja los elementos a los extremos */
+}
+
+.header-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-img {
+    height: 64px;
+    width: auto;
+    border-radius: 8px;
+}
+
+.logo-texto {
+    margin: 0;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.header-derecha {
+    display: flex;
+    gap: 35px;
+}
+
+.header-icono {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    front-weight: 600;
+    transition: color 0.3s ease;
+}
+.header-icono:hover {
+     color: #ffd700;
+}
+
+
+/* --- FRANJA MORADA DE NAVEGACIÓN --- */
+.franja-navegacion {
+    background-color: #4c0bce; /* Color morado */
+    display: flex;
+    justify-content: center; /* Centra la lista de links */
+}
+
+.links-navegacion {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Pone los links uno al lado del otro */
+}
+
+.links-navegacion li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 14px 25px; /* ¡CLAVE! Da altura y separación entre los links */
+    transition: background-color 0.2s ease;
+}
+
+.links-navegacion li a:hover {
+    background-color: rgba(255, 255, 255, 0.15); /* Efecto sutil al pasar el mouse */
 }

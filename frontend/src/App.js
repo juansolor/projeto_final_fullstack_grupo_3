@@ -21,7 +21,7 @@ function App() {
       <Header />
       <div className="header-placeholder"></div>
       <Navbar />
-      <div style={{ height: 70 }}></div>
+      <div style={{ height: '120px' }}></div>
       <div className="container" style={{ maxWidth: 1000 }}>
         <Routes>
           <Route path="/" element={<Home />} />
