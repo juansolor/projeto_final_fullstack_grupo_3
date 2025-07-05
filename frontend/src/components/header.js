@@ -60,10 +60,10 @@ const Header = () => {
             <Link to="/registro" className="btn btn-primary me-2" style={{ color: 'white !important' }}>
               <FaUserCircle className="me-1" /> Registrar
             </Link>
-            <Link to="/user" className="btn btn-success me-2">
+            <Link to="/user" className="btn btn-primary me-2" style={{ color: 'white !important' }}>
               <FaUserCircle className="me-1" /> Login
             </Link>
-            <Link to="/carrinho" className="btn btn-success position-relative">
+            <Link to="/carrinho" className="btn btn-primary position-relative" style={{ color: 'white !important' }}>
               <FaShoppingCart className="me-1" /> Carrinho
               {cartCount > 0 && (
                 <Badge bg="danger" pill className="position-absolute top-0 start-100 translate-middle">

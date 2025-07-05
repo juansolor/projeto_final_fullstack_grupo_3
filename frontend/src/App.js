@@ -14,6 +14,7 @@ import LojasProximity from './pages/LojasProximity';
 import Atendimento from './pages/subpages/Atendimento';
 import TrabalheConosco from './pages/subpages/TrabalheConosco';
 import SuperUser from './pages/SuperUser';
+import PaymentPage from './pages/PaymentPage';
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
       
       
 
-      <div className="container" style={{ maxWidth: 1000 }}>
+      <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/produto" element={<Produtos />} />
@@ -34,6 +35,7 @@ function App() {
           <Route path="/pages/subpages/Atendimento" element={<Atendimento />} />
           <Route path="/pages/subpages/TrabalheConosco" element={<TrabalheConosco />} />
           <Route path="/SuperUser" element={<SuperUser />} />
+          <Route path="/pagamento" element={<PaymentPage />} />
           {/* Adicione outras rotas conforme necessário */}
         </Routes>
       </div>

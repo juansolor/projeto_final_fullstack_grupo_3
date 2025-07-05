@@ -113,9 +113,9 @@ const SuperUser = () => {
                                 required
                             >
                                 <option value="">Selecione a categoria</option>
-                                <option value="bebidas">Bebidas</option>
-                                <option value="lanches">Lanches</option>
-                                <option value="sobremesas">Sobremesas</option>
+                                <option value="NoteBook">NoteBook</option>
+                                <option value="PC Gamer">Pc Gamer</option>
+                                <option value="Hadware">Hadware</option>
                                 <option value="outros">Outros</option>
                             </select>
                         </div>

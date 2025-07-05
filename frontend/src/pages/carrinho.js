@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,6 +7,7 @@ import "../App.css";
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const Carrinho = () => {
+  const navigate = useNavigate();
   const [carrinho, setCarrinho] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -133,7 +135,7 @@ const Carrinho = () => {
                 <span>Total:</span>
                 <span>R${total.toFixed(2)} + Entrega</span>
               </div>
-              <button className="btn btn-success w-100 mt-3" style={{fontWeight: 700, fontSize: 18}} onClick={handleCheckout}>Pagar Produto</button>
+              <button className="btn btn-success w-100 mt-3" style={{fontWeight: 700, fontSize: 18}} onClick={() => navigate('/pagamento')}>Pagar Produto</button>
             </div>
           </div>
         </div>

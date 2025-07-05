@@ -19,7 +19,11 @@ export default function Registro() {
 
   return (
     <div className="container mt-5">
-      <UsuarioForm onSave={handleSaveUser} />
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <UsuarioForm onSave={handleSaveUser} />
+        </div>
+      </div>
     </div>
   );
 }

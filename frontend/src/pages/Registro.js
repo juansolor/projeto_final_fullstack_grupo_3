@@ -10,6 +10,7 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
   const [cep, setCep] = useState('');
   const [telefone, setTelefone] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   useEffect(() => {
     if (editingUser) {
@@ -19,7 +20,8 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
       setEndereco(editingUser.endereco || '');
       setCep(editingUser.cep || '');
       setTelefone(editingUser.telefone || '');
-      setPassword(editingUser.password || ''); // Asegúrate de que el campo password esté presente en editingUser
+      setPassword(editingUser.password || '');
+      setConfirmPassword(editingUser.password || ''); // Set confirm password as well
     } else {
       setNome('');
       setEmail('');
@@ -28,6 +30,7 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
       setCep('');
       setTelefone('');
       setPassword('');
+      setConfirmPassword('');
     }
   }, [editingUser]);
   // Cambia el nombre de la función interna para evitar conflicto con la prop
@@ -57,15 +60,19 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
   // Asegúrate de que los nombres de los campos coincidan con los del modelo User en tu backend.
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ajusta los nombres de las propiedades según el esquema de tu base de datos
+    if (password !== confirmPassword) {
+      alert("As senhas não coincidem!");
+      return;
+    }
+    // Ajusta os nomes das propriedades segundo o esquema de tua base de dados
     handleSave({
       nome,           // nombre completo
       email,          // correo electrónico
-      comportamento,  // comportamiento (si existe en tu modelo)
+      comportamento,  // comportamento (si existe en tu modelo)
       endereco,       // dirección
       cep,            // código postal
       telefone,       // teléfono
-      password        // contraseña (si es necesario)
+      password        // contraseña (si é necesario)
     });
   };
 
@@ -138,6 +145,16 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
           </ul>
         </div>
       </div>
+      <div className="mb-3">
+        <label className="form-label">Confirmar Password:</label>
+        <input
+          type="password"
+          className="form-control"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+      </div>
       <button
         type="submit"
         className="btn btn-primary me-2"
@@ -160,6 +177,15 @@ export default function UsuarioForm({ onSave, editingUser, onCancel }) {
       >
         Cancelar
       </button>
+      <div className="mt-3 text-center">
+        <p>Ou cadastre-se com:</p>
+        <button className="btn w-100 mb-2" style={{ backgroundColor: '#DB4437', color: 'white' }}>
+          <i className="bi bi-google me-2"></i> Cadastrar com Gmail
+        </button>
+        <button className="btn w-100" style={{ backgroundColor: '#4267B2', color: 'white' }}>
+          <i className="bi bi-facebook me-2"></i> Cadastrar com Facebook
+        </button>
+      </div>
     </form>
   );
 }

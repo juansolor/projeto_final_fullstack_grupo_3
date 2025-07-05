@@ -87,6 +87,15 @@ const User = () => {
           </button>
         </form>
         <div className="mt-3 text-center">
+          <p>Ou conecte-se com:</p>
+          <button className="btn w-100 mb-2" style={{ backgroundColor: '#DB4437', color: 'white' }}>
+            <i className="bi bi-google me-2"></i> Conectar com Gmail
+          </button>
+          <button className="btn w-100" style={{ backgroundColor: '#4267B2', color: 'white' }}>
+            <i className="bi bi-facebook me-2"></i> Conectar com Facebook
+          </button>
+        </div>
+        <div className="mt-3 text-center">
           <Link to="/Registro" className="btn btn-link">
             Cadastrarse
           </Link>

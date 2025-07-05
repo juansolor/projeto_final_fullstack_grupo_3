@@ -163,8 +163,8 @@ const Home = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div style={{ background: "#f5f5f5", minHeight: "100vh" }}>
-      <div className="container py-4">
+    <div style={{ background: "#90EE90", minHeight: "100vh" }}>
+      <div className="container py-4" style={{ background: "#FFFFFF" }}>
         {/* Carrossel */}
         <div className="row align-items-center mb-4">
           <div className="col-12 col-md-10 mx-auto">
@@ -172,7 +172,7 @@ const Home = () => {
               <div className="carousel-inner rounded-4 shadow">
                 {carouselImages.map((img, idx) => (
                   <div className={`carousel-item${idx === 0 ? " active" : ""}`} key={idx}>
-                    <img src={img} className="d-block w-100" alt={`slide-${idx}`} style={{ height: 320, objectFit: "cover", borderRadius: 24 }} />
+                    <img src={img} className="d-block w-100" alt={`slide-${idx}`} style={{ objectFit: "cover", borderRadius: 24 }} />
                   </div>
                 ))}
               </div>
@@ -193,9 +193,9 @@ const Home = () => {
         <div className="row justify-content-center g-4 mb-5">
           {produtos.slice(0, 4).map((produto, idx) => (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" key={idx}>
-              <div className="card shadow-sm border-0 position-relative" style={{ width: "18rem", borderRadius: 16 }}>
+              <div className="card shadow-sm border-0 position-relative" style={{ borderRadius: 16 }}>
                 <span className="badge bg-danger position-absolute" style={{ top: 10, left: 10 }}>{produto.desconto || produto.promotionalPrice ? "Oferta" : ""}</span>
-                <img src={produto.img || produto.image} className="card-img-top" alt={produto.title || produto.name} style={{ height: 180, objectFit: "cover" }} />
+                <img src={produto.img || produto.image} className="card-img-top" alt={produto.title || produto.name} style={{ objectFit: "cover" }} />
                 <div className="card-body">
                   <div className="mb-2">
                     {Array.from({ length: produto.stars || 5 }).map((_, i) => (
@@ -246,8 +246,8 @@ const Home = () => {
             <div className="row g-4">
               {currentProducts.map((produto, idx) => (
                 <div className="col-12 col-sm-6 col-lg-4 d-flex justify-content-center" key={idx}>
-                  <div className="card shadow-sm border-0" style={{ width: "18rem", borderRadius: 16 }}>
-                    <img src={produto.img || produto.image} className="card-img-top" alt={produto.title || produto.name} style={{ height: 180, objectFit: "cover" }} />
+                  <div className="card shadow-sm border-0" style={{ borderRadius: 16 }}>
+                    <img src={produto.img || produto.image} className="card-img-top" alt={produto.title || produto.name} style={{ objectFit: "cover" }} />
                     <div className="card-body">
                       <h5 className="card-title" style={{ color: "#8439CC" }}>{produto.title || produto.name}</h5>
                       <p className="card-text">{produto.description}</p>
