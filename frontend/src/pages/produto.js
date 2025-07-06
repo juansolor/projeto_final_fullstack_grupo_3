@@ -66,10 +66,7 @@ const Produto = () => {
               ))}
             </div>
             <div className="fw-bold text-danger mb-2" style={{ fontSize: 28 }}>
-              {produto.promotionalPrice && (
-                <span className="text-muted text-decoration-line-through me-2" style={{ fontSize: 20 }}>{produto.price}</span>
-              )}
-              {produto.promotionalPrice || produto.price}
+              {produto.price}
             </div>
             <button
               className="btn mb-3"
@@ -84,13 +81,7 @@ const Produto = () => {
             >
               Comprar
             </button>
-            <div className="mb-2">
-              {produto.discountPercentage > 0 && (
-                <span className="badge bg-danger" style={{ fontSize: 16 }}>
-                  -{produto.discountPercentage}%
-                </span>
-              )}
-            </div>
+            
             <div className="mb-2" style={{ color: "#333" }}>
               <b>Pagamento:</b> A vista via PIX ou em até 12x
             </div>
