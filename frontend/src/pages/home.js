@@ -33,17 +33,29 @@ function randomFrom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-const produtosFallback = ofertasFallback.map((img, idx) => ({
-  title: titulos[idx % titulos.length],
-  description: randomFrom(descricoes),
-  nome: titulos[idx % titulos.length].split(' ')[0],
-  img: require(`../assets/${img}`),
-  price: `R$ ${(Math.random() * 2000 + 100).toFixed(2)}`.replace('.', ','),
-  desconto: randomFrom(descontos),
-  stars: 5,
-  details: "Detalhes do produto aqui.",
-  info: "Informações adicionais aqui."
-}));
+const produtosFallback = ofertasFallback.map((img, idx) => {
+  const originalPrice = parseFloat((`R$ ${(Math.random() * 2000 + 100).toFixed(2)}`).replace('R$ ', '').replace(',', '.'));
+  const discountString = randomFrom(descontos);
+  const discountPercentage = parseFloat(discountString.replace('% Desconto', ''));
+
+  let promotionalPrice = null;
+  if (!isNaN(discountPercentage) && discountPercentage > 0) {
+    promotionalPrice = originalPrice * (1 - discountPercentage / 100);
+  }
+
+  return {
+    title: titulos[idx % titulos.length],
+    description: randomFrom(descricoes),
+    nome: titulos[idx % titulos.length].split(' ')[0],
+    img: require(`../assets/${img}`),
+    price: `R$ ${originalPrice.toFixed(2)}`.replace('.', ','),
+    promotionalPrice: promotionalPrice ? `R$ ${promotionalPrice.toFixed(2)}`.replace('.', ',') : null,
+    discountPercentage: discountPercentage,
+    stars: 5,
+    details: "Detalhes do produto aqui.",
+    info: "Informações adicionais aqui."
+  };
+});
 
 const carouselImages = [
   require("../assets/Auragear-produto2.jpg"),
@@ -66,6 +78,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [produtos, setProdutos] = useState([]);
   const [filteredProdutos, setFilteredProdutos] = useState([]);
+  const [promotionalProducts, setPromotionalProducts] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Todas');
   const [priceRange, setPriceRange] = useState(2000);
@@ -142,6 +155,27 @@ const Home = () => {
     setCurrentPage(1);
   }, [produtos, selectedCategory, priceRange, selectedBrands]);
 
+  useEffect(() => {
+    const promoProducts = produtos.slice(0, 4).map(product => {
+      const originalPrice = parseFloat((product.price || product.promotionalPrice).replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
+      const discountString = randomFrom(descontos);
+      const discountPercentage = parseFloat(discountString.replace('% Desconto', ''));
+
+      let promotionalPrice = null;
+      if (!isNaN(discountPercentage) && discountPercentage > 0) {
+        promotionalPrice = originalPrice * (1 - discountPercentage / 100);
+      }
+
+      return {
+        ...product,
+        price: `R$ ${originalPrice.toFixed(2)}`.replace('.', ','),
+        promotionalPrice: promotionalPrice ? `R$ ${promotionalPrice.toFixed(2)}`.replace('.', ',') : null,
+        discountPercentage: discountPercentage,
+      };
+    });
+    setPromotionalProducts(promoProducts);
+  }, [produtos]);
+
   const handleVerProduto = (produto) => {
     navigate("/produto", { state: { produto } });
   };
@@ -191,10 +225,12 @@ const Home = () => {
         {/* Seção de Destaques */}
         <h2 className="text-center mb-4" style={{ color: "#d90000", fontWeight: 700, fontSize: 32 }}>Promoções Imperdíveis!!!</h2>
         <div className="row justify-content-center g-4 mb-5">
-          {produtos.slice(0, 4).map((produto, idx) => (
+          {promotionalProducts.map((produto, idx) => (
             <div className="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center" key={idx}>
               <div className="card shadow-sm border-0 position-relative" style={{ borderRadius: 16 }}>
-                <span className="badge bg-danger position-absolute" style={{ top: 10, left: 10 }}>{produto.desconto || produto.promotionalPrice ? "Oferta" : ""}</span>
+                {produto.discountPercentage > 0 && (
+                  <span className="badge bg-danger position-absolute" style={{ top: 10, left: 10 }}>-{produto.discountPercentage}%</span>
+                )}
                 <img src={produto.img || produto.image} className="card-img-top" alt={produto.title || produto.name} style={{ objectFit: "cover" }} />
                 <div className="card-body">
                   <div className="mb-2">
@@ -204,7 +240,12 @@ const Home = () => {
                   </div>
                   <h5 className="card-title" style={{ color: "#8439CC" }}>{produto.title || produto.name}</h5>
                   <p className="card-text">{produto.description}</p>
-                  <div className="fw-bold text-danger mb-2">{produto.price || `R$ ${produto.promotionalPrice}`}</div>
+                  <div className="mb-2">
+                    {produto.promotionalPrice && (
+                      <span className="text-muted text-decoration-line-through me-2">{produto.price}</span>
+                    )}
+                    <span className="fw-bold text-danger">{produto.promotionalPrice || produto.price}</span>
+                  </div>
                   <button className="btn w-100" style={{ background: "#3FD37D", color: "#fff" }} onClick={() => handleVerProduto(produto)}>
                     Ver produto
                   </button>
@@ -217,10 +258,14 @@ const Home = () => {
         {/* Banners de Promoção */}
         <div className="row justify-content-center g-4 mb-5">
           <div className="col-12 col-md-6 d-flex justify-content-center">
-            <img src="http://localhost:3001/uploads/Promo/2.png" alt="Promo Banner 1" className="img-fluid rounded-4 shadow" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
+            <a href="/user">
+              <img src="http://localhost:3001/uploads/Promo/2.png" alt="Promo Banner 1" className="img-fluid rounded-4 shadow" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
+            </a>
           </div>
           <div className="col-12 col-md-6 d-flex justify-content-center">
-            <img src="http://localhost:3001/uploads/Promo/3.png" alt="Promo Banner 2" className="img-fluid rounded-4 shadow" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
+            <a href="/user">
+              <img src="http://localhost:3001/uploads/Promo/3.png" alt="Promo Banner 2" className="img-fluid rounded-4 shadow" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
+            </a>
           </div>
         </div>
 

@@ -19,7 +19,7 @@ const Produto = () => {
         typeof produto.img === "string"
           ? produto.img
           : produto.img?.default || "",
-      preco: Number(produto.price.replace(/[^\d,]/g, "").replace(",", ".")),
+      preco: Number((produto.promotionalPrice || produto.price).replace(/[^\d,]/g, "").replace(",", ".")),
       quantidade: 1,
     };
     try {
@@ -66,7 +66,10 @@ const Produto = () => {
               ))}
             </div>
             <div className="fw-bold text-danger mb-2" style={{ fontSize: 28 }}>
-              {produto.price}
+              {produto.promotionalPrice && (
+                <span className="text-muted text-decoration-line-through me-2" style={{ fontSize: 20 }}>{produto.price}</span>
+              )}
+              {produto.promotionalPrice || produto.price}
             </div>
             <button
               className="btn mb-3"
@@ -82,9 +85,11 @@ const Produto = () => {
               Comprar
             </button>
             <div className="mb-2">
-              <span className="badge bg-danger" style={{ fontSize: 16 }}>
-                {produto.desconto}
-              </span>
+              {produto.discountPercentage > 0 && (
+                <span className="badge bg-danger" style={{ fontSize: 16 }}>
+                  -{produto.discountPercentage}%
+                </span>
+              )}
             </div>
             <div className="mb-2" style={{ color: "#333" }}>
               <b>Pagamento:</b> A vista via PIX ou em até 12x
