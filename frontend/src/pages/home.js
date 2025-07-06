@@ -263,18 +263,13 @@ const Home = () => {
           ))}
         </div>
 
-        {/* Banners de Promoção */}
-        <div className="row justify-content-center g-4 mb-5">
-          <div className="col-12 col-md-6 d-flex justify-content-center">
-            <a href="/user">
+        <div className="row justify-content-center g-0 mb-3 mx-auto d-flex" style={{ maxWidth: "100%" }}>
+            <a href="/user" style={{ flex: 1 }}>
               <img src="http://localhost:3001/uploads/Promo/2.png" alt="Promo Banner 1" className="img-fluid rounded-4 shadow" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
             </a>
-          </div>
-          <div className="col-12 col-md-6 d-flex justify-content-center">
-            <a href="/user">
+            <a href="/user" style={{ flex: 1 }}>
               <img src="http://localhost:3001/uploads/Promo/3.png" alt="Promo Banner 2" className="img-fluid rounded-4 shadow" style={{ width: "100%", height: "250px", objectFit: "cover" }} />
             </a>
-          </div>
         </div>
 
         {/* Seção de Filtros + Produtos */}
@@ -314,7 +309,7 @@ const Home = () => {
                     <div className="card-body">
                       <h5 className="card-title" style={{ color: "#8439CC" }}>{produto.title || produto.name}</h5>
                       <p className="card-text">{produto.description}</p>
-                      <div className="fw-bold text-danger mb-2">{produto.price || `R$ ${produto.promotionalPrice}`}</div>
+                      <div className="fw-bold text-danger mb-2">{produto.price}</div>
                       <button className="btn w-100" style={{ background: "#3FD37D", color: "#fff" }} onClick={() => handleVerProduto(produto)}>
                         Ver produto
                       </button>
@@ -336,6 +331,13 @@ const Home = () => {
                 ))}
               </ul>
             </nav>
+          </div>
+        </div>
+
+        {/* Banner de Anúncio */}
+        <div className="row justify-content-center mb-5">
+          <div className="col-12 text-center">
+            <img src="http://localhost:3001/uploads/Blog/7.png" alt="Anúncio" className="img-fluid rounded-4 shadow" style={{ width: "100%", maxHeight: "400px", objectFit: "cover" }} />
           </div>
         </div>
 
