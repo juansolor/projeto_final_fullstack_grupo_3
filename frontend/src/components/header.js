@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Form, Button, InputGroup, Badge, Nav } from 'react-bootstrap';
 import { FaShoppingCart, FaUserCircle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Header = () => {
   const [cartCount, setCartCount] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate(`/?search=${searchTerm.trim()}`);
+    }
+  };
 
   useEffect(() => {
     const fetchCartCount = async () => {
@@ -51,8 +59,15 @@ const Header = () => {
                 type="search"
                 placeholder="Pesquisar produtos..."
                 aria-label="Search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSearch();
+                  }
+                }}
               />
-              <Button variant="primary">Buscar</Button>
+              <Button variant="primary" onClick={handleSearch}>Buscar</Button>
             </InputGroup>
           </div>
 

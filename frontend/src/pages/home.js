@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const ofertasFallback = [
   "Auragear-produto2.jpg", "Auragear-produto3.jpg", "Aureagerar-produto1.jpg", "Auragear-logo.jpg",
@@ -76,6 +76,7 @@ const carouselImages = [
 
 const Home = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [produtos, setProdutos] = useState([]);
   const [filteredProdutos, setFilteredProdutos] = useState([]);
   const [promotionalProducts, setPromotionalProducts] = useState([]);
@@ -132,6 +133,13 @@ const Home = () => {
   useEffect(() => {
     let filtered = [...produtos];
 
+    const searchTerm = searchParams.get('search');
+    if (searchTerm) {
+      filtered = filtered.filter(p =>
+        (p.title || p.name).toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
     if (selectedCategory !== 'Todas') {
       filtered = filtered.filter(p => (p.title || p.name).toLowerCase().includes(selectedCategory));
     }
@@ -153,7 +161,7 @@ const Home = () => {
 
     setFilteredProdutos(filtered);
     setCurrentPage(1);
-  }, [produtos, selectedCategory, priceRange, selectedBrands]);
+  }, [produtos, selectedCategory, priceRange, selectedBrands, searchParams]);
 
   useEffect(() => {
     const promoProducts = produtos.slice(0, 4).map(product => {
