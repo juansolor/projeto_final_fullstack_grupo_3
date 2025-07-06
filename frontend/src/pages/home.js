@@ -115,6 +115,8 @@ const Home = () => {
             category = "monitor";
           } else if (productNameLower.includes("impressora")) {
             category = "impressora";
+          } else if (productNameLower.includes("pc gamer") || productNameLower.includes("computador gamer")) {
+            category = "pc-gamer";
           }
 
           return {
@@ -247,7 +249,7 @@ const Home = () => {
                     ))}
                   </div>
                   <h5 className="card-title" style={{ color: "#8439CC" }}>{produto.title || produto.name}</h5>
-                  <p className="card-text">{produto.description}</p>
+
                   <div className="mb-2">
                     {produto.promotionalPrice && (
                       <span className="text-muted text-decoration-line-through me-2">{produto.price}</span>
@@ -313,7 +315,7 @@ const Home = () => {
                     <img src={produto.img || produto.image} className="card-img-top" alt={produto.title || produto.name} style={{ objectFit: "cover" }} />
                     <div className="card-body">
                       <h5 className="card-title" style={{ color: "#8439CC" }}>{produto.title || produto.name}</h5>
-                      <p className="card-text">{produto.description}</p>
+    
                       <div className="fw-bold text-danger mb-2">{produto.price || `R$ ${produto.promotionalPrice}`}</div>
                       <button className="btn w-100" style={{ background: "#3FD37D", color: "#fff" }} onClick={() => handleVerProduto(produto)}>
                         Ver produto
@@ -337,6 +339,71 @@ const Home = () => {
               </ul>
             </nav>
           </div>
+        </div>
+
+        {/* Seção de Produtos Novos */}
+        <h2 className="text-center mb-4" style={{ color: "#d90000", fontWeight: 700, fontSize: 32 }}>Produtos Novos</h2>
+
+        {/* Subseção de Notebooks */}
+        <h3 className="text-center mb-3" style={{ color: "#8439CC", fontWeight: 600 }}>Notebooks</h3>
+        <div className="d-flex flex-nowrap overflow-auto mb-5">
+          {newProducts.filter(p => p.category === 'notebook').map((produto, idx) => (
+            <div style={{ flex: '0 0 auto', width: '200px', marginRight: '10px' }} className="d-flex justify-content-center" key={idx}>
+              <div className="card shadow-sm border-0" style={{ borderRadius: 16 }}>
+                <img src={produto.image} className="card-img-top" alt={produto.name} style={{ objectFit: "cover" }} />
+                <div className="card-body">
+                  <h5 className="card-title" style={{ color: "#8439CC", fontSize: '16px' }}>{produto.name}</h5>
+
+                  <div className="fw-bold text-danger mb-2">{produto.price}</div>
+                  <button className="btn w-100" style={{ background: "#3FD37D", color: "#fff" }} onClick={() => handleVerProduto(produto)}>
+                    Ver produto
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Subseção de PC Gamer */}
+        <h3 className="text-center mb-3" style={{ color: "#8439CC", fontWeight: 600 }}>PC Gamer</h3>
+        <div className="d-flex flex-nowrap overflow-auto mb-5">
+          {newProducts.filter(p => p.category === 'pc-gamer').map((produto, idx) => (
+            <div style={{ flex: '0 0 auto', width: '200px', marginRight: '10px' }} className="d-flex justify-content-center" key={idx}>
+              <div className="card shadow-sm border-0" style={{ borderRadius: 16 }}>
+                <img src={produto.image} className="card-img-top" alt={produto.name} style={{ objectFit: "cover" }} />
+                <div className="card-body">
+                  <h5 className="card-title" style={{ color: "#8439CC", fontSize: '16px' }}>{produto.name}</h5>
+
+                  <div className="fw-bold text-danger mb-2">{produto.price}</div>
+                  <button className="btn w-100" style={{ background: "#3FD37D", color: "#fff" }} onClick={() => handleVerProduto(produto)}>
+                    Ver produto
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        
+
+        {/* Subseção de Monitores */}
+        <h3 className="text-center mb-3" style={{ color: "#8439CC", fontWeight: 600 }}>Monitores</h3>
+        <div className="d-flex flex-nowrap overflow-auto mb-5">
+          {newProducts.filter(p => p.category === 'monitor').map((produto, idx) => (
+            <div style={{ flex: '0 0 auto', width: '200px', marginRight: '10px' }} className="d-flex justify-content-center" key={idx}>
+              <div className="card shadow-sm border-0" style={{ borderRadius: 16 }}>
+                <img src={produto.image} className="card-img-top" alt={produto.name} style={{ objectFit: "cover" }} />
+                <div className="card-body">
+                  <h5 className="card-title" style={{ color: "#8439CC", fontSize: '16px' }}>{produto.name}</h5>
+
+                  <div className="fw-bold text-danger mb-2">{produto.price}</div>
+                  <button className="btn w-100" style={{ background: "#3FD37D", color: "#fff" }} onClick={() => handleVerProduto(produto)}>
+                    Ver produto
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Aplicativo */}
