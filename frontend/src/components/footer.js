@@ -15,7 +15,7 @@ const Footer = () => {
             borderRadius: "100px",
           }}
         />
-        <p>Projeto Fullstack 2025 &copy; Integrantes:</p>
+        <p>Projeto Fullstack &copy; 2025</p>
         <ul>
           <h4>Integrantes:</h4>
           <li>Juan Solorzano Ojeda</li>
